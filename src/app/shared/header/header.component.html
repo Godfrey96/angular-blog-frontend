@@ -1,0 +1,19 @@
+<!-- header section starts here -->
+<header class="header">
+
+    <a routerLink="/" class="logo"><span>SK-</span>blogger</a>
+
+    <nav class="navbar">
+        <!-- <a href="#">banner</a> -->
+        <a *ngIf="user" routerLink="/my-posts">my posts</a>
+        <a *ngIf="!user" routerLink="/login">login/Register</a>
+        <a *ngIf="user" routerLink="/create-post">create post</a>
+        <a *ngIf="user" routerLink="/" (click)="logout()">logout</a>
+    </nav>
+
+    <!-- <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+    </div> -->
+
+</header>

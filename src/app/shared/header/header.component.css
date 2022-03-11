@@ -1,0 +1,97 @@
+/* HEADER STYLES STARTS HERE */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 7%;
+}
+
+.header .logo {
+  color: #000;
+  font-size: 2.5rem;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.header .logo span {
+  color: crimson;
+  font-weight: bold;
+}
+
+.header .navbar a {
+  color: var(--lighter-color);
+  margin-right: 2rem;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.header .navbar a:hover {
+  color: var(--orange);
+}
+
+.header .icons i {
+  height: 4.5rem;
+  line-height: 4.5rem;
+  width: 4.5rem;
+  text-align: center;
+  color: var(--black);
+  background: #eee;
+  border-radius: 50%;
+  margin-left: 0.7rem;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.header .icons i:hover {
+  color: #fff;
+  background: var(--orange);
+}
+
+.header .search-form {
+  position: absolute;
+  background: #fff;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+  top: 110%;
+  right: 7%;
+  height: 6rem;
+  width: 50rem;
+  padding: 1rem;
+  display: none;
+}
+
+.header .search-form.active {
+  display: flex;
+}
+
+.header .search-form #search-box {
+  width: 100%;
+  border: var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.7rem;
+  color: var(--black);
+  height: 100%;
+}
+
+.header .search-form label {
+  font-size: 2rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  cursor: pointer;
+  color: var(--black);
+}
+
+.header .search-form label:hover {
+  color: var(--orange);
+}
+
+/* HEADER STYLES ENDS HERE */

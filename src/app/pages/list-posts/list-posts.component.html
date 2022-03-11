@@ -1,0 +1,18 @@
+<div class="container container-box">
+    <div class="row justify-content-evenly">
+        <div class="col-md-8 posts-container">
+            <div class="post" *ngFor="let post of posts">
+                <app-list-posts-item [post]="post"></app-list-posts-item>
+            </div>
+        </div>
+
+        <div class="col-md-3 box-sidebar">
+            <div class="box">
+                <h3 class="title">categories</h3>
+                <div class="category" *ngFor="let category of categories">
+                    <a routerLink="posts-by-category/{{category?.id}}">{{ category?.name }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

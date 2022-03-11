@@ -1,0 +1,22 @@
+<a routerLink="/post-details/{{post?.id}}">
+    <img src="{{ post?.image }}" alt="" class="image">
+</a>
+<div class="date">
+    <i class="far fa-clock"></i>
+    <span>{{ post?.updatedAt | date: 'short' }}</span>
+</div>
+<h3 class="title">
+    <a routerLink="/post-details/{{post?.id}}">{{ post?.title }}</a>
+</h3>
+<div class="text">
+    <div>
+        <div [innerHTML]="(post?.description) ? (post?.description | slice:0:200) + '...' : post?.description">
+        </div>
+    </div>
+</div>
+<div class="links">
+    <a href="#" class="user">
+        <i class="far fa-user"></i>
+        <span>by {{post?.username}}</span>
+    </a>
+</div>

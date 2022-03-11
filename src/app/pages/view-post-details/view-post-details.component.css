@@ -1,0 +1,52 @@
+.container-box .view-container .post .image {
+  height: 30rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+.container-box .view-container .post .date {
+  padding-top: 2rem;
+  font-size: 1.5rem;
+  color: var(--orange);
+}
+
+.container-box .view-container .post .text {
+  color: var(--lighter-color);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  padding: 1rem 0;
+}
+
+.container-box .view-container .links {
+  border-top: var(--border);
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.container-box .view-container .links .user {
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.container-box .view-container .links .icon {
+  padding-right: 1rem;
+}
+.container-box .view-container .links a {
+  font-size: 1.5rem;
+  color: var(--lighter-color);
+}
+
+.container-box .view-container .links a i {
+  padding-right: 0.2rem;
+  color: var(--black);
+}
+
+.container-box .view-container .links a:hover {
+  color: var(--orange);
+}
+
+.container-box .view-container .links a:hover i {
+  color: var(--orange);
+}

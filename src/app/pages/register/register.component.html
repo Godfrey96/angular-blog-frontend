@@ -1,0 +1,60 @@
+<div class="container container-box">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4 p-5">
+            <h3 style="font-size: 5rem;">Welcome</h3>
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Register Page</h2>
+            <form [formGroup]="registerFormGroup">
+                <div class="grid mt-6">
+                    <div class="col-12 mt-2">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input type="text" formControlName="username" pInputText placeholder="Username">
+                        </div>
+                        <small *ngIf="registerForm['username'].invalid && isSubmitted" class="p-error">Username is
+                            required
+                        </small>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                            <input type="text" formControlName="email" pInputText placeholder="Email">
+                        </div>
+                        <small *ngIf="registerForm['email'].invalid && isSubmitted" class="p-error"><span
+                                *ngIf="registerForm['email'].errors && registerForm['email'].errors['required']">Email
+                                is
+                                required</span>
+                            <span *ngIf="registerForm['email'].errors && registerForm['email']">Email is invalid</span>
+                        </small>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                            <input type="password" formControlName="password" pInputText placeholder="Password">
+                        </div>
+                        <small *ngIf="registerForm['password'].invalid && isSubmitted" class="p-error">Password is
+                            required
+                        </small>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <p-button styleClass="full-btn" label="Register" (onClick)="onSubmit()"></p-button>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <h5 class="newAcc">
+                            Already have an account? Login
+                            <a routerLink="/login">here</a>
+                        </h5>
+                    </div>
+                    <div class="col-12" *ngIf="isSubmitted && authError">
+                        <small class="p-error">{{ authMessage }}</small>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+</div>

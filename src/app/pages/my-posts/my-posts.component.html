@@ -1,0 +1,56 @@
+<p-toast></p-toast>
+<div class="container container-box">
+
+    <div class="admin-page">
+        <p-card header="Posts" subheader="List of all my Posts">
+            <div class="grid">
+                <div class="col-12">
+                    <p-toolbar>
+                        <div class="p-toolbar-group-left">
+                            <p-button styleClass="p-button-success" label="New" icon="pi pi-plus"
+                                routerLink='/create-post'>
+                            </p-button>
+                        </div>
+                    </p-toolbar>
+                </div>
+            </div>
+
+            <div class="grid mt-3">
+                <div class="col-12">
+                    <p-table [value]="myPosts" [paginator]="true" [rows]="5" responsiveLayout="scroll"
+                        styleClass="p-datatable-gridlines">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="name">Title <p-sortIcon field="name"></p-sortIcon>
+                                </th>
+                                <th>Image</th>
+                                <th pSortableColumn="price">Description <p-sortIcon field="price"></p-sortIcon>
+                                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+                                <th pSortableColumn="created">Created at <p-sortIcon field="created"></p-sortIcon>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-post>
+                            <tr>
+                                <td>{{ post.title }}</td>
+                                <td><img [src]="post.image" style="width: 100%; height: 100px;" alt="" /></td>
+                                <td>{{ post.description }}</td>
+                                <td>{{ post.category?.name }}</td>
+                                <td>{{ post.createdAt | date: 'short' }}</td>
+                                <td>
+                                    <p-button (click)="deletePost(post.id)" styleClass="p-button-danger mr-2"
+                                        icon="pi pi-trash"></p-button>
+                                    <p-button (click)="updatePost(post.id)" styleClass="p-button-success ml-1"
+                                        icon="pi pi-pencil"></p-button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
+
+</div>

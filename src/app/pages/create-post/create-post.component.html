@@ -1,0 +1,106 @@
+<p-toast></p-toast>
+<div class="container container-box">
+    <div class="row">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+
+            <p-card [header]="editmode ? 'Edit Post':'Add a New Post'" subheader="You can add or edit products here">
+                <div class="grid mb-5">
+                    <div class="col-12">
+                        <p-toolbar>
+                            <div class="p-toolbar-group-left"></div>
+                            <div class="p-toolbar-group-right">
+                                <p-button styleClass="p-button-primary" [label]="editmode ? 'Update':'Create'"
+                                    icon="pi pi-plus" (click)="onSubmit()">
+                                </p-button>
+                                <p-button styleClass="p-button-secondary" label="Cancel" icon="pi pi-arrow-circle-left"
+                                    (click)="onCancle()">
+                                </p-button>
+                            </div>
+                        </p-toolbar>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-12">
+                        <!-- <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">
+                            Add a new Post
+                        </h2> -->
+                        <form [formGroup]="form">
+                            <div class="p-fluid p-formgrid grid">
+                                <div class="p-field col">
+                                    <label for="title">Post Title</label>
+                                    <input type="text" formControlName="title" id="title" pInputText
+                                        placeholder="Title">
+                                </div>
+
+                                <div class="p-field col mt-3">
+                                    <label for="title">Choose Category</label>
+                                    <p-dropdown [options]="categories" formControlName="category" optionLabel="name"
+                                        optionValue="id" [filter]="true" filterBy="name" [showClear]="true"
+                                        placeholder="Select a Category"></p-dropdown>
+                                </div>
+
+                                <div class="p-field col mt-3">
+                                    <label for="description">Post Description</label>
+                                    <p-editor formControlName="description" [style]="{ height: '320px' }"></p-editor>
+                                    <!-- <textarea pInputTextarea id="description" formControlName="description" [rows]="7"
+                                        [cols]="30"></textarea> -->
+                                </div>
+
+                                <div class="p-field col mt-3">
+                                    <label for="name">Post Image</label>
+                                    <input type="file" class="p-inputtext" accept="image/*"
+                                        (change)="onImageUpload($event)">
+                                    <div class="p-col-2 mt-2 p-pl-0">
+                                        <img style="width: 100%" [src]="imageDisplay" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <!-- <div class="p-fluid p-formgrid grid">
+                            <div class="p-field col">
+                                <label for="title">Post Title</label>
+                                <input type="text" [(ngModel)]="title" id="title" pInputText placeholder="Title">
+                            </div>
+
+                            <div class="p-field col mt-3">
+                                <label for="title">Choose Category</label>
+                                <p-dropdown [options]="categories" [(ngModel)]="category" optionLabel="name"
+                                    optionValue="id" [filter]="true" filterBy="name" [showClear]="true"
+                                    placeholder="Select a Category"></p-dropdown>
+                            </div>
+
+                            <div class="p-field col mt-3">
+                                <label for="description">Post Description</label>
+                                <textarea pInputTextarea id="description" [(ngModel)]="description" [rows]="7"
+                                    [cols]="30"></textarea>
+                            </div>
+
+                            <div class="p-field col mt-3">
+                                <label for="name">Post Image</label>
+                                <input type="file" class="p-inputtext" accept="image/*"
+                                    (change)="onImageUpload($event)">
+                                <div class="p-col-2 mt-2 p-pl-0">
+                                    <img style="width: 100%" [src]="photoFilePath" alt="" />
+                                </div>
+                            </div>
+
+                            <p-button styleClass="p-button-primary mr-2" label="Create" icon="pi pi-plus"
+                                (click)="onSubmit()">
+                            </p-button>
+                        </div> -->
+                    </div>
+                </div>
+
+            </p-card>
+
+
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+</div>
