@@ -10,7 +10,10 @@ import { PostsService } from 'src/app/services/posts.service';
 import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { finalize, timer } from 'rxjs';
+import firebase from 'firebase/compat/app';
+import 'firebase/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-create-post',
@@ -43,7 +46,8 @@ export class CreatePostComponent implements OnInit {
     private authServce: AuthService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private afStorage: AngularFireStorage,
   ) { }
 
   ngOnInit(): void {
@@ -99,22 +103,47 @@ export class CreatePostComponent implements OnInit {
 
   onImageUpload(event: any) {
     console.log(event);
-    const file = event.target.files[0];
-
-    if (file) {
-      this.form.patchValue({ image: file });
-      this.form.get('image')?.updateValueAndValidity();
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.imageDisplay = fileReader.result as string
-        // console.log('image: ', this.imageDisplay)
-      }
-      fileReader.readAsDataURL(file);
-    }
+    const files = event.target.files;
+    if (files.length === 0) return;
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) === null) return;
+    const file = files[0];
+    const filePath = 'blog/' + Date.now() + '_' + file.name;
+    const fileRef = this.afStorage.ref(filePath);
+    const task = this.afStorage.upload(filePath, file);
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        const downloadUrl = fileRef.getDownloadURL();
+        downloadUrl.subscribe((url: any) => {
+          console.log('url: ', url);
+          if (url) {
+            this.imageDisplay = url;
+          }
+        });
+      })
+    ).subscribe(url => {
+      console.log('data: ', url);
+    });
   }
 
+  // onImageUpload(event: any) {
+  //   console.log(event);
+  //   const file = event.target.files[0];
+
+  //   if (file) {
+  //     this.form.patchValue({ image: file });
+  //     this.form.get('image')?.updateValueAndValidity();
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = () => {
+  //       this.imageDisplay = fileReader.result as string
+  //       // console.log('image: ', this.imageDisplay)
+  //     }
+  //     fileReader.readAsDataURL(file);
+  //   }
+  // }
+
   // add new post
-  private _addPost(post: FormData) {
+  private _addPost(post: Post) {
     this.postsService.createPost(post).subscribe((post: Post) => {
       this.messageService.add({
         severity: 'success',
@@ -135,8 +164,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   // update post
-  private _updatePost(postData: FormData) {
-    this.postsService.updatePost(postData, this.currentPostId).subscribe(() => {
+  private _updatePost(post: Post) {
+    this.postsService.updatePost(post, this.currentPostId).subscribe(() => {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
@@ -161,27 +190,38 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('new new')
-    // this.isSubmitted = true;
-    if (this.form.invalid) return;
-    const postFormData = new FormData();
+    this.isSubmitted = true;
+    // if (this.form.invalid) return;
 
-    postFormData.append('title', this.postForm['title'].value);
-    postFormData.append('description', this.postForm['description'].value);
-    postFormData.append('category', this.postForm['category'].value);
-    postFormData.append('image', this.postForm['image'].value);
-    postFormData.append('username', this.user);
+    // const postFormData = new FormData();
+
+    // postFormData.append('title', this.postForm['title'].value);
+    // postFormData.append('description', this.postForm['description'].value);
+    // postFormData.append('category', this.postForm['category'].value);
+    // postFormData.append('image', this.postForm['image'].value);
+    // postFormData.append('username', this.user);
 
     // Object.keys(this.postForm).map((key) => {
     //   postFormData.append(key, this.postForm[key].value);
     //   // postFormData.append('user', this.user);
     // });
 
+    const post: Post = {
+      id: this.currentPostId,
+      title: this.postForm['title'].value,
+      description: this.postForm['description'].value,
+      image: this.imageDisplay,
+      category: this.postForm['category'].value,
+      username: this.user,
+    }
+
+    console.log('post: ', post);
+
 
     if (this.editmode) {
-      this._updatePost(postFormData);
+      this._updatePost(post);
     } else {
-      this._addPost(postFormData);
+      this._addPost(post);
     }
 
   }

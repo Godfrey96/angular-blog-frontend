@@ -33,6 +33,9 @@
                                     <label for="title">Post Title</label>
                                     <input type="text" formControlName="title" id="title" pInputText
                                         placeholder="Title">
+                                    <small *ngIf="postForm['title'].invalid && isSubmitted" class="p-error">
+                                        Title is required
+                                    </small>
                                 </div>
 
                                 <div class="p-field col mt-3">
@@ -40,13 +43,17 @@
                                     <p-dropdown [options]="categories" formControlName="category" optionLabel="name"
                                         optionValue="id" [filter]="true" filterBy="name" [showClear]="true"
                                         placeholder="Select a Category"></p-dropdown>
+                                    <small *ngIf="postForm['category'].invalid && isSubmitted" class="p-error">
+                                        Category is required
+                                    </small>
                                 </div>
 
                                 <div class="p-field col mt-3">
                                     <label for="description">Post Description</label>
                                     <p-editor formControlName="description" [style]="{ height: '320px' }"></p-editor>
-                                    <!-- <textarea pInputTextarea id="description" formControlName="description" [rows]="7"
-                                        [cols]="30"></textarea> -->
+                                    <small *ngIf="postForm['description'].invalid && isSubmitted" class="p-error">
+                                        Description is required
+                                    </small>
                                 </div>
 
                                 <div class="p-field col mt-3">

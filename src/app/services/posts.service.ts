@@ -36,8 +36,8 @@ export class PostsService {
   }
 
   // add a new post
-  createPost(postData: FormData): Observable<Post> {
-    return this.http.post<Post>(this.apiUrlPosts, postData);
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(this.apiUrlPosts, post);
   }
 
   // upload image to firebase storage
@@ -57,8 +57,8 @@ export class PostsService {
   }
 
   // update post
-  updatePost(postData: FormData, postId: string): Observable<Post> {
-    return this.http.put<Post>(`${this.apiUrlPosts}/${postId}`, postData);
+  updatePost(post: Post, postId: string): Observable<Post> {
+    return this.http.put<Post>(`${this.apiUrlPosts}/${postId}`, post);
   }
 
   // delete posts

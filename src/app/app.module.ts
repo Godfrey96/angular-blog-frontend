@@ -18,10 +18,10 @@ import { ViewPostDetailsComponent } from './pages/view-post-details/view-post-de
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideStorage, getStorage } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+// import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+// import { provideStorage, getStorage } from '@angular/fire/storage';
+// import { AngularFireModule } from '@angular/fire/compat';
+// import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -38,7 +38,13 @@ import { ViewPostsByCategoryComponent } from './pages/view-posts-by-category/vie
 import { ListPostsItemComponent } from './pages/list-posts/list-posts-item/list-posts-item.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
+
 import { environment } from 'src/environments/environment.prod';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 const UX_MODULE = [
   InputTextModule,
@@ -75,6 +81,11 @@ const UX_MODULE = [
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     // AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireStorageModule,
     // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
