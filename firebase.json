@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "sk-blogger",
+    "public": "dist/blog",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

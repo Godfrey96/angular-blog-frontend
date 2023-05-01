@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "shop-255c5"
+  },
+  "targets": {
+    "shop-255c5": {
+      "hosting": {
+        "sk-blogger": [
+          "sk-blogger"
+        ]
+      }
+    }
+  }
+}
